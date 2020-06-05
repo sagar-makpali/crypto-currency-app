@@ -1,0 +1,49 @@
+<div *ngIf="favouriteCoin.length>0">
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- Go back button -->
+    <a class="btn btn-warning m-2 ml-4 btn-sm" role="button" (click)="goBackToPreviousPage()">
+      <i class="fa fa-arrow-left" style="font-size:20px"></i> Back</a>
+  
+  
+  
+    <!-- <table -->
+    <div class="mt-4 table-responsive-xl table-responsive-md table-hover table-condensed">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" class="text-info">S.No</th>
+            <th scope="col" class="text-info" style="cursor: pointer;" (click)=sortByName(favouriteCoin)>Name</th>
+            <th scope="col" class="text-info" style="cursor: pointer;" (click)=sortByPrice(favouriteCoin)> Current Price</th>
+            <th scope="col" class="text-info" style="cursor: pointer;" (click)=sortByMarketCap(favouriteCoin)>Market Cap</th>
+            <th scope="col" class="text-info" style="cursor: pointer;" (click)=sortBySymbol(favouriteCoin)>Symbol</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr (press)="checkboxdisplay()" *ngFor="let items of favouriteCoin | paginate: { itemsPerPage: 10, currentPage: p }; let i = index ">
+            <th scope="row">{{i+1}} <input type="checkbox" *ngIf="displaycheckbox" (change)="onChange(items.id, $event.target.checked)"></th>
+            <!-- <td>{{ i+1 }}</td> -->
+            <td style="cursor: pointer;" (click)="gopricechart(id=items.id)"><a>
+                <img src="https://s2.coinmarketcap.com/static/img/coins/32x32/{{items.id}}.png" width="23" height="23"
+                  alt="">&nbsp; {{items.name}}</a></td>
+            <td style="cursor: pointer;" (click)="gopricechart(id=items.id)"><img src="https://img.icons8.com/color/48/000000/money-bag.png"/>
+              {{items.quote.USD.price}}</td>
+            <td style="cursor: pointer;" (click)="gopricechart(id=items.id)"><img src="https://img.icons8.com/color/48/000000/money-bag.png"/>
+              {{items.quote.USD.market_cap}}</td>
+            <td style="cursor: pointer;" (click)="gopricechart(id=items.id)"><a>
+                <img src="https://s2.coinmarketcap.com/static/img/coins/32x32/{{items.id}}.png" width="23" height="23"
+                  alt="">&nbsp; {{items.symbol}}</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="p = $event" style="float: right"></pagination-controls>
+    </div>
+      <!-- Compare button -->
+      <div class="row" style="text-align: center">
+        <div class=" ml-4 mr-2">
+          <button class="btn btn-info" (click)="OnSelectCurrency()" *ngIf="displaycheckbox">Compare</button>
+        </div>
+      </div>
+  </div>

@@ -1,0 +1,13 @@
+<br>
+<br>
+<br>
+<!-- Go back button -->
+<a class="btn btn-info m-2 ml-4 btn-sm" role="button" (click)="goBackToPreviousPage()">
+  <i class="fa fa-arrow-left" style="font-size:20px"></i> Back</a>
+
+<!-- Chart container -->
+<div class="container">
+  <div class="chart-container" style="position: relative; height:40vh; width:80vw" *ngIf="chart">
+    <canvas id="canvas">{{ chart }}</canvas>
+  </div>
+</div>

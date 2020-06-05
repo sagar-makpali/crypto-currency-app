@@ -1,0 +1,67 @@
+
+<br><br><br>
+<div *ngIf="arr.length>0">
+
+  <!-- Range slider -->
+  <div class="row">
+    <div class="col-12">
+      <form class="form-row my-2">
+        <div class="col-sm-4 col-md-4 col-lg-4 l-2 m-2">
+          <label for="Price"><b>Sort by: Price</b></label>
+          <ion-range-slider #sliderElement type="double" max="15000" min=".00001" from_shadow="true" to_shadow="true"
+            grid="true" grid_num="4" prefix=" " postfix="" decorate_both="" (onChange)="myOnChange($event, 'price')"></ion-range-slider>
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2 l-2 m-2"></div>
+        <div class="col-sm-4 col-md-4 col-lg-4 l-2 m-2">
+          <label for="Cap"><b>Sort by: Market-Cap</b></label>
+          <ion-range-slider #sliderElement type="double" max="2300000000" min="1000" from_shadow="true" to_shadow="true"
+            grid="true" grid_num="3" prefix="" postfix="" decorate_both="false" (onChange)="myOnChange($event, 'marketCap')"></ion-range-slider>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  
+
+  <!-- Table -->
+  <div class="table-responsive-xl table-responsive-md table-hover table-condensed">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col" class="text-info">S.NO</th>
+          <th scope="col" class="text-info" style="cursor: pointer;" (click)=sortByName(arr)>Name</th>
+          <th scope="col" class="text-info" style="cursor: pointer;" (click)=sortByPrice(arr)>Current Price</th>
+          <th scope="col" class="text-info" style="cursor: pointer;" (click)=sortByMarketCap(arr)>Market Cap</th>
+          <th scope="col" class="text-info" style="cursor: pointer;" (click)=sortBySymbol(arr)>Symbol</th>
+          <th scope="col" class="text-info">Favourites</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr (press)="checkboxdisplay()" *ngFor="let items of arr  | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+          <th scope="row">{{i+1}} <input type="checkbox" *ngIf="displaycheckbox" (change)="onChange(items.id, $event.target.checked)"></th>
+          <td style="cursor: pointer;" (click)="gopricechart(id=items.id)"><a class="namesall">
+              <img src="https://s2.coinmarketcap.com/static/img/coins/32x32/{{items.id}}.png" width="23" height="23"
+                alt="">&nbsp; {{items.name}}</a></td>
+          <td style="cursor: pointer;" (click)="gopricechart(id=items.id)"><img src="https://img.icons8.com/color/48/000000/money-bag.png"/>
+            {{items.quote.USD.price}}</td>
+          <td style="cursor: pointer;" (click)="gopricechart(id=items.id)"><img src="https://img.icons8.com/color/48/000000/money-bag.png"/>
+            {{items.quote.USD.market_cap}}</td>
+          <td style="cursor: pointer;" (click)="gopricechart(id=items.id)"><a>
+              <img src="https://s2.coinmarketcap.com/static/img/coins/32x32/{{items.id}}.png" width="23" height="23"
+                alt="">&nbsp; {{items.symbol}}</a></td>
+          <td>
+            <i style="cursor: pointer;" class="fa fa-heart" aria-hidden="false" (click)="onSelect(items.id)" [ngClass]="{active: isActive(items.id)}"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+<!-- Compare button -->
+<div class="row" style="text-align: center">
+  <div class=" ml-4 m-2">
+    <button class="btn btn-info" (click)="OnSelectCurrency()" *ngIf="displaycheckbox">Compare</button>
+  </div>
+</div>
+
+</div>

@@ -1,0 +1,32 @@
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<nav class="navbar bg-dark navbar-dark navbar-expand-sm fixed-top" style="background: linear-gradient(to right,rgb(85, 153, 119), #5f7894 );">
+  <div class="container-fluid">
+    <!--container of navbar-->
+    <div class="navbar-brand m-0 p-0">
+      
+      <a class="nav-item nav-link text-white" [routerLink]="['/list']"><img src="https://img.icons8.com/color/48/000000/bitcoin-sccepted.png"/><b>CRYPTO CURRENCY</b></a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myTogglernav" aria-controls="myTogglernav"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!--for collapsing-->
+    <div class="collapse navbar-collapse" id="myTogglernav">
+      <div class="navbar-nav ml-auto ">
+        <a class="nav-item nav-link " [routerLink]="['/list']"><img src="https://img.icons8.com/color/48/000000/home.png"/><b>Home</b></a>
+        <a class="nav-item nav-link " [routerLink]="['/favourites']"><img src="https://img.icons8.com/color/48/000000/hearts.png"/><b>Favourites</b></a>
+          <input type="text" placeholder="Search Currency.." name="search" [(ngModel)]="searchItem" required>
+          <button type="submit" (click)="searchFunction()" ><i class="fa fa-search"></i></button>
+       
+      </div>
+      <!-- navbar-->
+    </div>
+    <!--collapse-->
+  </div>
+  <!--container-->
+</nav>
+<!--nav-->
+
+<router-outlet></router-outlet>
